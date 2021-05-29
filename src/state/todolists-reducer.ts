@@ -13,11 +13,21 @@ import { TodolistType } from "../App"
             return state.filter(t => t.id != action.id)
         }
          case('ADD-TODOLIST') : {
+            
+            
             return [...state, {
                 id: v1(),
                 title: action.title,
                 filter: 'all'
             }]  
+         }
+         case('CHANGE-TODOLIST-TITLE') : {
+            const todolist = state.find(tl => tl.id === action.id);
+            if (todolist) {
+                // если нашёлся - изменим ему заголовок
+                todolist.title = action.title;
+            }
+            return [...state] 
          }
         default:
             throw new Error("I don't understand this type")
